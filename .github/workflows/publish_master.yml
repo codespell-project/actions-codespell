@@ -1,0 +1,27 @@
+name: Push image
+
+on:
+  push:
+    branches:
+    - master
+  schedule:
+  # Every Sunday, create a new version, to make sure we use an up-to-date base image, etc
+  - cron: '0 0 * * 0'
+
+jobs:
+  publish_image:
+    name: Publish image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: |
+        GITHUB_REPOSITORY_LC=$(echo "${GITHUB_REPOSITORY}" | tr [A-Z] [a-z])
+        docker build -t docker.pkg.github.com/${GITHUB_REPOSITORY_LC}/master:latest .
+    - name: Publish
+      run: |
+        GITHUB_REPOSITORY_LC=$(echo "${GITHUB_REPOSITORY}" | tr [A-Z] [a-z])
+        docker login docker.pkg.github.com -u publisher -p "${GITHUB_TOKEN}"
+        docker push docker.pkg.github.com/${GITHUB_REPOSITORY_LC}/master:latest
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
