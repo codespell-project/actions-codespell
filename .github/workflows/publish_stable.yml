@@ -1,0 +1,26 @@
+name: Push image
+
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  publish_image:
+    name: Publish image
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: |
+        GITHUB_REPOSITORY_LC=$(echo "${GITHUB_REPOSITORY}" | tr [A-Z] [a-z])
+        TAG=$(echo "${GITHUB_REF}" | sed 's@^refs/tags/@@')
+        docker build -t docker.pkg.github.com/${GITHUB_REPOSITORY_LC}/stable:${TAG} .
+    - name: Publish
+      run: |
+        GITHUB_REPOSITORY_LC=$(echo "${GITHUB_REPOSITORY}" | tr [A-Z] [a-z])
+        TAG=$(echo "${GITHUB_REF}" | sed 's@^refs/tags/@@')
+        docker login docker.pkg.github.com -u publisher -p "${GITHUB_TOKEN}"
+        docker push docker.pkg.github.com/${GITHUB_REPOSITORY_LC}/stable:${TAG}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
