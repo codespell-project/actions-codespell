@@ -1,4 +1,4 @@
-name: Push image
+name: Publish stable image
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   publish_image:
-    name: Publish image
+    name: Publish stable image
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
