@@ -1,0 +1,14 @@
+name: Testing
+
+on: [pull_request]
+
+jobs:
+  run_action:
+    name: Test run action
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - uses: ./
+      with:
+        path: example
+        only_warn: 1

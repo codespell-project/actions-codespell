@@ -1,0 +1,14 @@
+name: 'Flake8'
+description: 'Flake8 with annotations for Pull Request'
+inputs:
+  path:
+    description: 'Path to run flake8 in'
+    requred: false
+    default: ''
+  only_warn:
+    description: 'If set, only warn, never error'
+    requred: false
+    default: ''
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
