@@ -9,8 +9,14 @@ echo "::add-matcher::${RUNNER_TEMP}/_github_workflow/flake8-matcher.json"
 # The weird piping is needed because we want to get the exitcode from flake8,
 # but there is no other good universal way of doing so.
 # e.g. PIPESTATUS and pipestatus only work in bash/zsh respectively.
+echo "Running flake8 on '${INPUT_PATH}' ..."
 exec 5>&1
 res=`{ { flake8 ${INPUT_PATH}; echo $? 1>&4; } | sed -r 's/: ([^W][0-9][0-9][0-9])/: error: \1/;s/: (W[0-9][0-9][0-9])/: warning: \1/' 1>&5; } 4>&1`
+if [ "$res" = "0" ]; then
+    echo "Flake8 found no problems"
+else
+    echo "Flake8 found one or more problems"
+fi
 
 # Remove the matcher, so no other jobs hit it.
 echo "::remove-matcher owner=flake8::"
