@@ -1,7 +1,7 @@
 {
     "problemMatcher": [
         {
-            "owner": "flake8",
+            "owner": "codespell",
             "pattern": [
                 {
                     "regexp": "^([^:]*):(\\d+):(\\d+): (error|warning): (\\w\\d\\d\\d) (.*)$",

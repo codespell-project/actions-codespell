@@ -1,9 +1,9 @@
-name: 'Flake8 with annotations'
-author: 'Patric "TrueBrain" Stout'
-description: 'Flake8 with annotations for Pull Request'
+name: 'Codespell with annotations'
+author: 'Peter Newman'
+description: 'Codespell with annotations for Pull Request'
 inputs:
   path:
-    description: 'Path to run flake8 in'
+    description: 'Path to run codespell in'
     requred: false
     default: ''
   only_warn:

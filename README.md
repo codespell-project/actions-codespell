@@ -1,23 +1,23 @@
-# Flake8 with GitHub Actions -- including annotations for Pull Requests
+# Codespell with GitHub Actions -- including annotations for Pull Requests
 
-This GitHub Actions runs flake8 over your code.
-Any warnings or errors will be annoted in the Pull Request.
+This GitHub Actions runs codespell over your code.
+Any warnings or errors will be annotated in the Pull Request.
 
 ## Usage
 
 ```
-uses: TrueBrain/actions-flake8@master
+uses: peternewman/actions-codespell@master
 ```
 
 ### Parameter: path
 
-Indicates the path to run `flake8` in.
-This can be useful if your project is more than Python code.
+Indicates the path to run `codespell` in.
+This can be useful if your project has code you don't want to spell check for some reason.
 
-This parameter is optional; by default `flake8` will run on your whole repository.
+This parameter is optional; by default `codespell` will run on your whole repository.
 
 ```
-uses: TrueBrain/actions-flake8@master
+uses: peternewman/actions-codespell@master
 with:
   path: src
 ```
@@ -31,7 +31,7 @@ All errors and warnings are annotated in Pull Requests, but it will act like eve
 This parameter is optional; setting this to any value will enable it.
 
 ```
-uses: TrueBrain/actions-flake8@master
+uses: peternewman/actions-codespell@master
 with:
   only_warn: 1
 ```
