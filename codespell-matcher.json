@@ -4,12 +4,10 @@
             "owner": "codespell",
             "pattern": [
                 {
-                    "regexp": "^([^:]*):(\\d+):(\\d+): (error|warning): (\\w\\d\\d\\d) (.*)$",
+                    "regexp": "^([^:]*):(\\d+): (.*)$",
                     "file": 1,
                     "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 6
+                    "message": 3
                 }
             ]
         }
