@@ -1,0 +1,20 @@
+name: Test
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - uses: actions/setup-python@v1
+    - run: pip install codespell
+    - uses: ./
+    - name: Check codespell
+      run: codespell test/test.txt || true
+    - name: Check codespell on an unusually named file
+      run: codespell test/test:2.txt || true
