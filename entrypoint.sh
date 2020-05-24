@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Copy the matcher to the host system; otherwise "add-matcher" can't find it.
-cp /code/codespell-problem-matcher/codespell-matcher.json /github/workflow/codespell-matcher.json
+cp /code/codespell-matcher.json /github/workflow/codespell-matcher.json
 echo "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json"
 
 # Run codespell. We add 'error/warning' as GitHub Actions ProblemMatcher needs
