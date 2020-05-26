@@ -1,0 +1,9 @@
+name: 'codespell problem matcher'
+author: 'Peter Newman'
+description: 'Shows codespell errors as annotation (with file and code line) in GitHub Actions'
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'search'
+  color: 'green'

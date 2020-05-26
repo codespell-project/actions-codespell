@@ -2,6 +2,18 @@ name: 'Codespell with annotations'
 author: 'Peter Newman'
 description: 'Codespell with annotations for Pull Request'
 inputs:
+  check_filenames:
+    description: 'If set, check file names as well'
+    requred: false
+    default: ''
+  check_hidden:
+    description: 'If set, check hidden files (those starting with ".") as well'
+    requred: false
+    default: ''
+  exclude_file:
+    description: 'FILE with lines that should not be changed'
+    requred: false
+    default: ''
   path:
     description: 'Path to run codespell in'
     requred: false
