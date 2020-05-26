@@ -12,9 +12,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@master
     - uses: actions/setup-python@v1
-    - run: pip install codespell
+    - run: pip install git+https://github.com/codespell-project/codespell.git
     - uses: ./
     - name: Check codespell
       run: codespell test/test.txt || true
     - name: Check codespell on an unusually named file
       run: codespell test/test:2.txt || true
+    - name: Check codespell on a binary file
+      run: codespell test/test.bin || true
