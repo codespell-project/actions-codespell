@@ -31,8 +31,9 @@ function setup() {
     [ "${lines[1]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
     outputRegex="^Running codespell on '${INPUT_PATH}'"
     [[ "${lines[2]}" =~ $outputRegex ]]
-    [ "${lines[-2]}" == "Codespell found one or more problems" ]
-    [ "${lines[-1]}" == "::remove-matcher owner=codespell::" ]
+    [ "${lines[-3]}" == "Codespell found one or more problems" ]
+    [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
+    [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
 }
 
 @test "Check file names" {
