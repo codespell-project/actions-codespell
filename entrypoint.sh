@@ -37,8 +37,9 @@ else
     echo "Codespell found one or more problems"
 fi
 
-# Remove the matcher, so no other jobs hit it.
-echo "::remove-matcher owner=codespell::"
+# Remove the matchers, so no other jobs hit them.
+echo "::remove-matcher owner=codespell-matcher-default::"
+echo "::remove-matcher owner=codespell-matcher-specified::"
 
 # If we are in warn-only mode, return always as if we pass
 if [ -n "${INPUT_ONLY_WARN}" ]; then
