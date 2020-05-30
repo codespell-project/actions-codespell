@@ -71,7 +71,7 @@ function setup() {
 
 @test "Check the skip option" {
     expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
-    INPUT_SKIP="./test/exclude-file.txt"
+    INPUT_SKIP="test/exclude-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
