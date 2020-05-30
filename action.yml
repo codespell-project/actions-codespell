@@ -14,6 +14,10 @@ inputs:
     description: 'FILE with lines that should not be changed'
     requred: false
     default: ''
+  skip:
+    description: 'Comma-separated list of files to skip (it accepts globs as well)'
+    requred: false
+    default: ''
   path:
     description: 'Path to run codespell in'
     requred: false
