@@ -6,7 +6,21 @@ on:
   pull_request:
 
 jobs:
-  test:
+  test-stable:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - uses: actions/setup-python@v1
+    - run: pip install codespell
+    - uses: ./
+    - name: Check codespell
+      run: codespell test/test.txt || true
+    - name: Check codespell on an unusually named file
+      run: codespell test/test:2.txt || true
+    - name: Check codespell on a binary file
+      run: codespell test/test.bin || true
+  test-master:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
