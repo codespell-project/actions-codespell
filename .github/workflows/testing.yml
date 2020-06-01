@@ -6,6 +6,9 @@ jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        codespell_pip_version: ['codespell', 'git+https://github.com/codespell-project/codespell.git']
 
     steps:
       - name: Checkout
@@ -14,8 +17,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
 
-      - name: Install codespell
-        run: pip3 --quiet --quiet install codespell
+      - name: Install codespell via pip using ${{ matrix.codespell_pip_version }}
+        run: pip3 --quiet --quiet install ${{ matrix.codespell_pip_version }}
 
       - name: Install Bats
         run: |
