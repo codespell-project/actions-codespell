@@ -26,7 +26,7 @@ function setup() {
 
 @test "Run with defaults" {
     # codespell's exit status is the number of misspelled words found
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 
@@ -40,17 +40,13 @@ function setup() {
 }
 
 @test "Check file names" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + FILENAME_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + FILENAME_MISSPELLING_COUNT))
     INPUT_CHECK_FILENAMES=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Check a hidden file" {
-    # codespell --check-hidden has a somewhat unintuitive behavior. When run on
-    # a directory, codespell works on hidden files even if this option is not
-    # enabled. It's only when INPUT_PATH points directly at a hidden file that
-    # codespell ignores it by default.
     expectedExitStatus=$HIDDEN_MISSPELLING_COUNT
     INPUT_CHECK_HIDDEN=true
     INPUT_PATH="./test/testdata/.hidden"
@@ -66,14 +62,14 @@ function setup() {
 }
 
 @test "Use an exclude file" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
     INPUT_EXCLUDE_FILE="./test/exclude-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Check the skip option" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT))
     INPUT_SKIP="example.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
