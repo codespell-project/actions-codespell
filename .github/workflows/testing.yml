@@ -6,9 +6,14 @@ jobs:
   test:
     name: Run tests
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
-        codespell_pip_version: ['codespell', 'git+https://github.com/codespell-project/codespell.git']
+        codespell_pip_version: ['codespell']
+        experimental: [false]
+        include:
+          - codespell_pip_version: 'git+https://github.com/codespell-project/codespell.git'
+            experimental: true
 
     steps:
       - name: Checkout
@@ -41,3 +46,19 @@ jobs:
       with:
         path: test/testdata
         only_warn: 1
+
+  diagnose_bats:
+    name: Diagnose bats
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python
+        uses: actions/setup-python@v2
+      - run: pip3 --quiet --quiet install git+https://github.com/codespell-project/codespell.git
+      - run: |
+          export INPUT_CHECK_FILENAMES=""
+          export INPUT_CHECK_HIDDEN=""
+          export INPUT_EXCLUDE_FILE=""
+          export INPUT_PATH="./test/testdata"
+          export INPUT_ONLY_WARN=""
+          ./entrypoint.sh

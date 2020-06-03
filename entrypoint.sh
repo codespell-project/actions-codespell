@@ -24,6 +24,10 @@ echo "Exclude file '${INPUT_EXCLUDE_FILE}'"
 if [ "x${INPUT_EXCLUDE_FILE}" != "x" ]; then
     command_args="${command_args} --exclude-file ${INPUT_EXCLUDE_FILE}"
 fi
+echo "Skipping '${INPUT_SKIP}'"
+if [ "x${INPUT_SKIP}" != "x" ]; then
+    command_args="${command_args} --skip ${INPUT_SKIP}"
+fi
 echo "Resulting CLI options ${command_args}"
 exec 5>&1
 res=`{ { codespell ${command_args} ${INPUT_PATH}; echo $? 1>&4; } 1>&5; } 4>&1`

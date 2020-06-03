@@ -8,6 +8,8 @@ FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
 SUBFOLDER_MISSPELLING_COUNT=1
+# From all files called example.txt
+EXAMPLE_MISSPELLING_COUNT=5
 
 export RUNNER_TEMP="/foo/runner_temp"
 
@@ -17,6 +19,7 @@ function setup() {
     export INPUT_CHECK_FILENAMES=""
     export INPUT_CHECK_HIDDEN=""
     export INPUT_EXCLUDE_FILE=""
+    export INPUT_SKIP=""
     export INPUT_PATH="./test/testdata"
     export INPUT_ONLY_WARN=""
 }
@@ -65,6 +68,13 @@ function setup() {
 @test "Use an exclude file" {
     expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
     INPUT_EXCLUDE_FILE="./test/exclude-file.txt"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+
+@test "Check the skip option" {
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT))
+    INPUT_SKIP="example.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
