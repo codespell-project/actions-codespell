@@ -8,12 +8,14 @@ jobs:
     runs-on: ubuntu-latest
     continue-on-error: ${{ matrix.experimental }}
     strategy:
+      fail-fast: false
       matrix:
         codespell_pip_version: ['codespell']
         experimental: [false]
         include:
           - codespell_pip_version: 'git+https://github.com/codespell-project/codespell.git'
-            experimental: true
+            # Set this to true if git master is breaking the action's tests
+            experimental: false
 
     steps:
       - name: Checkout
