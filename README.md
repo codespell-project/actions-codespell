@@ -6,7 +6,7 @@ Any warnings or errors will be annotated in the Pull Request.
 ## Usage
 
 ```
-uses: peternewman/actions-codespell@master
+uses: codespell-project/actions-codespell@master
 ```
 
 ### Parameter: path
@@ -17,7 +17,7 @@ This can be useful if your project has code you don't want to spell check for so
 This parameter is optional; by default `codespell` will run on your whole repository.
 
 ```
-uses: peternewman/actions-codespell@master
+uses: codespell-project/actions-codespell@master
 with:
   path: src
 ```
@@ -31,7 +31,7 @@ All errors and warnings are annotated in Pull Requests, but it will act like eve
 This parameter is optional; setting this to any value will enable it.
 
 ```
-uses: peternewman/actions-codespell@master
+uses: codespell-project/actions-codespell@master
 with:
   only_warn: 1
 ```
