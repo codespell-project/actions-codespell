@@ -56,6 +56,8 @@ jobs:
       with:
         check_filenames: true
         check_hidden: true
+        # When using this Action in other repos, the --skip option below can be removed
+        skip: ./.git/,./codespell-problem-matcher/test/,./test/
 
   diagnose_bats:
     name: Diagnose bats
