@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -41,11 +41,23 @@ jobs:
     name: Test run action
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
     - uses: ./
       with:
         path: test/testdata
         only_warn: 1
+
+  codespell:
+    name: Check for spelling errors
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./
+      with:
+        check_filenames: true
+        check_hidden: true
+        # When using this Action in other repos, the --skip option below can be removed
+        skip: ./.git,./codespell-problem-matcher/test,./test
 
   diagnose_bats:
     name: Diagnose bats
