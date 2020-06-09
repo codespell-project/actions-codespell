@@ -4,27 +4,27 @@ description: 'Codespell with annotations for Pull Request'
 inputs:
   check_filenames:
     description: 'If set, check file names as well'
-    requred: false
+    required: false
     default: ''
   check_hidden:
     description: 'If set, check hidden files (those starting with ".") as well'
-    requred: false
+    required: false
     default: ''
   exclude_file:
     description: 'File with lines that should not be checked for spelling mistakes'
-    requred: false
+    required: false
     default: ''
   skip:
     description: 'Comma-separated list of files to skip (it accepts globs as well)'
-    requred: false
+    required: false
     default: ''
   path:
     description: 'Path to run codespell in'
-    requred: false
+    required: false
     default: ''
   only_warn:
     description: 'If set, only warn, never error'
-    requred: false
+    required: false
     default: ''
 runs:
   using: 'docker'
