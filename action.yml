@@ -11,7 +11,7 @@ inputs:
     required: false
     default: ''
   exclude_file:
-    description: 'FILE with lines that should not be changed'
+    description: 'File with lines that should not be checked for spelling mistakes'
     required: false
     default: ''
   skip:
