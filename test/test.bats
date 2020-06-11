@@ -79,6 +79,20 @@ function setup() {
     [ $status -eq $expectedExitStatus ]
 }
 
+@test "Use an ignore words file" {
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    INPUT_IGNORE_WORDS_FILE="./test/ignore-words-file.txt"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+
+@test "Use an ignore words list" {
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    INPUT_IGNORE_WORDS_LIST="abandonned"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+
 @test "Custom path" {
     expectedExitStatus=$((SUBFOLDER_MISSPELLING_COUNT))
     INPUT_PATH="./test/testdata/subfolder"
