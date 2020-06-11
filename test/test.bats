@@ -7,6 +7,7 @@ ROOT_MISSPELLING_COUNT=5
 FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
+IGNORE_WORDS_MISSPELLING_COUNT=1
 SUBFOLDER_MISSPELLING_COUNT=1
 # From all files called example.txt
 EXAMPLE_MISSPELLING_COUNT=5
@@ -20,6 +21,8 @@ function setup() {
     export INPUT_CHECK_HIDDEN=""
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
+    export INPUT_IGNORE_WORDS_FILE=""
+    export INPUT_IGNORE_WORDS_LIST=""
     export INPUT_PATH="./test/testdata"
     export INPUT_ONLY_WARN=""
 }
@@ -80,14 +83,14 @@ function setup() {
 }
 
 @test "Use an ignore words file" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
     INPUT_IGNORE_WORDS_FILE="./test/ignore-words-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Use an ignore words list" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
     INPUT_IGNORE_WORDS_LIST="abandonned"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
