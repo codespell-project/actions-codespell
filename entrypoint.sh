@@ -32,11 +32,11 @@ echo "Builtin dictionaries '${INPUT_BUILTIN}'"
 if [ "x${INPUT_BUILTIN}" != "x" ]; then
     command_args="${command_args} --builtin ${INPUT_BUILTIN}"
 fi
-echo " '${INPUT_IGNORE_WORDS_FILE}'"
+echo "Ignore words file '${INPUT_IGNORE_WORDS_FILE}'"
 if [ "x${INPUT_IGNORE_WORDS_FILE}" != "x" ]; then
     command_args="${command_args} --ignore-words ${INPUT_IGNORE_WORDS_FILE}"
 fi
-echo " '${INPUT_IGNORE_WORDS_LIST}'"
+echo "Ignore words list '${INPUT_IGNORE_WORDS_LIST}'"
 if [ "x${INPUT_IGNORE_WORDS_LIST}" != "x" ]; then
     command_args="${command_args} --ignore-words-list ${INPUT_IGNORE_WORDS_LIST}"
 fi
