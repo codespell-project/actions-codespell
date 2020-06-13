@@ -3,7 +3,7 @@
 # Tests using the Bats testing framework
 # https://github.com/bats-core/bats-core
 
-ROOT_MISSPELLING_COUNT=6
+ROOT_MISSPELLING_COUNT=5
 FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
@@ -85,7 +85,7 @@ function setup() {
 }
 
 @test "Use an additional builtin dictionary" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - BUILTIN_NAMES_MISSPELLING_COUNT))
+    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + BUILTIN_NAMES_MISSPELLING_COUNT))
     INPUT_BUILTIN="clear,rare,names"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
