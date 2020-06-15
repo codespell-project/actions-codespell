@@ -18,6 +18,18 @@ inputs:
     description: 'Comma-separated list of files to skip (it accepts globs as well)'
     required: false
     default: ''
+  builtin:
+    description: 'Comma-separated list of builtin dictionaries to include'
+    required: false
+    default: ''
+  ignore_words_file:
+    description: 'File with a list of words to be ignored'
+    required: false
+    default: ''
+  ignore_words_list:
+    description: 'Comma-separated list of words to be ignored'
+    required: false
+    default: ''
   path:
     description: 'Path to run codespell in'
     required: false
