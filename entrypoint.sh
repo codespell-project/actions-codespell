@@ -24,6 +24,10 @@ if [ -n "${INPUT_CHECK_HIDDEN}" ]; then
     echo "Checking hidden"
     command_args="${command_args} --check-hidden"
 fi
+echo "Config '${INPUT_CONFIG}'"
+if [ "x${INPUT_CONFIG}" != "x" ]; then
+    command_args="${command_args} --config ${INPUT_CONFIG}"
+fi
 echo "Exclude file '${INPUT_EXCLUDE_FILE}'"
 if [ "x${INPUT_EXCLUDE_FILE}" != "x" ]; then
     command_args="${command_args} --exclude-file ${INPUT_EXCLUDE_FILE}"
