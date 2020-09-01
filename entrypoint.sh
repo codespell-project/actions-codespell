@@ -10,6 +10,10 @@ echo "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json"
 # e.g. PIPESTATUS and pipestatus only work in bash/zsh respectively.
 echo "Running codespell on '${INPUT_PATH}' with the following options..."
 command_args=""
+echo "Builtin dictionaries '${INPUT_BUILTIN}'"
+if [ "x${INPUT_BUILTIN}" != "x" ]; then
+    command_args="${command_args} --builtin ${INPUT_BUILTIN}"
+fi
 echo "Check filenames? '${INPUT_CHECK_FILENAMES}'"
 if [ -n "${INPUT_CHECK_FILENAMES}" ]; then
     echo "Checking filenames"
@@ -24,14 +28,6 @@ echo "Exclude file '${INPUT_EXCLUDE_FILE}'"
 if [ "x${INPUT_EXCLUDE_FILE}" != "x" ]; then
     command_args="${command_args} --exclude-file ${INPUT_EXCLUDE_FILE}"
 fi
-echo "Skipping '${INPUT_SKIP}'"
-if [ "x${INPUT_SKIP}" != "x" ]; then
-    command_args="${command_args} --skip ${INPUT_SKIP}"
-fi
-echo "Builtin dictionaries '${INPUT_BUILTIN}'"
-if [ "x${INPUT_BUILTIN}" != "x" ]; then
-    command_args="${command_args} --builtin ${INPUT_BUILTIN}"
-fi
 echo "Ignore words file '${INPUT_IGNORE_WORDS_FILE}'"
 if [ "x${INPUT_IGNORE_WORDS_FILE}" != "x" ]; then
     command_args="${command_args} --ignore-words ${INPUT_IGNORE_WORDS_FILE}"
@@ -39,6 +35,10 @@ fi
 echo "Ignore words list '${INPUT_IGNORE_WORDS_LIST}'"
 if [ "x${INPUT_IGNORE_WORDS_LIST}" != "x" ]; then
     command_args="${command_args} --ignore-words-list ${INPUT_IGNORE_WORDS_LIST}"
+fi
+echo "Skipping '${INPUT_SKIP}'"
+if [ "x${INPUT_SKIP}" != "x" ]; then
+    command_args="${command_args} --skip ${INPUT_SKIP}"
 fi
 echo "Resulting CLI options ${command_args}"
 exec 5>&1
