@@ -14,6 +14,10 @@ inputs:
     description: 'If set, check hidden files (those starting with ".") as well'
     required: false
     default: ''
+  config:
+    description: 'Path to a codespell config file'
+    required: false
+    default: ''
   exclude_file:
     description: 'File with lines that should not be checked for spelling mistakes'
     required: false
