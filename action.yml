@@ -2,6 +2,10 @@ name: 'Codespell with annotations'
 author: 'Peter Newman'
 description: 'Codespell with annotations for Pull Request'
 inputs:
+  builtin:
+    description: 'Comma-separated list of builtin dictionaries to include'
+    required: false
+    default: ''
   check_filenames:
     description: 'If set, check file names as well'
     required: false
@@ -12,14 +16,6 @@ inputs:
     default: ''
   exclude_file:
     description: 'File with lines that should not be checked for spelling mistakes'
-    required: false
-    default: ''
-  skip:
-    description: 'Comma-separated list of files to skip (it accepts globs as well)'
-    required: false
-    default: './.git'
-  builtin:
-    description: 'Comma-separated list of builtin dictionaries to include'
     required: false
     default: ''
   ignore_words_file:
@@ -34,6 +30,10 @@ inputs:
     description: 'Path to run codespell in'
     required: false
     default: ''
+  skip:
+    description: 'Comma-separated list of files to skip (it accepts globs as well)'
+    required: false
+    default: './.git'
   only_warn:
     description: 'If set, only warn, never error'
     required: false
