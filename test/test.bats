@@ -20,6 +20,7 @@ function setup() {
     # Set default input values
     export INPUT_CHECK_FILENAMES=""
     export INPUT_CHECK_HIDDEN=""
+    export INPUT_QUIET_LEVEL=""
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
     export INPUT_BUILTIN=""
