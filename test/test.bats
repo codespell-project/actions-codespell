@@ -16,6 +16,8 @@ SUBFOLDER_MISSPELLING_COUNT=1
 # From all files called example.txt
 EXAMPLE_MISSPELLING_COUNT=5
 
+ERROR_COUNT_LINE_NUMBER=10
+
 export RUNNER_TEMP="/foo/runner_temp"
 
 # This function runs before every test
@@ -27,8 +29,8 @@ function setup() {
     [ -d "/code/" ] || sudo mkdir -p /code/
     [ -f "/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json /code/
     #ls -alR /code/
-    [ -d "/github/workflow/" ] || sudo mkdir -p /github/workflow/ && sudo chmod 777 /github/workflow/
     # Add a random place BATS tries to put it
+    [ -d "/github/workflow/" ] || sudo mkdir -p /github/workflow/ && sudo chmod 777 /github/workflow/
     #ls -alR /github/workflow/
 
     # Set default input values
@@ -51,14 +53,10 @@ function setup() {
     [ $status -eq $expectedExitStatus ]
 
     # Check output
-    echo "Line 0"
-    echo ${lines[0]}
-    echo "Output:"
-    echo "$output"
     [ "${lines[0]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
     outputRegex="^Running codespell on '${INPUT_PATH}'"
     [[ "${lines[1]}" =~ $outputRegex ]]
-    [ "${lines[10]}" == "$errorCount" ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
     [ "${lines[-3]}" == "Codespell found one or more problems" ]
     [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
     [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
@@ -71,6 +69,7 @@ function setup() {
     INPUT_CHECK_FILENAMES=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Check a hidden file" {
@@ -81,6 +80,7 @@ function setup() {
     INPUT_PATH="./test/testdata/.hidden"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Check a hidden file without INPUT_CHECK_HIDDEN set" {
@@ -90,6 +90,7 @@ function setup() {
     INPUT_PATH="./test/testdata/.hidden"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Use an exclude file" {
@@ -99,6 +100,7 @@ function setup() {
     INPUT_EXCLUDE_FILE="./test/exclude-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Check the skip option" {
@@ -108,6 +110,7 @@ function setup() {
     INPUT_SKIP="example.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Use an additional builtin dictionary" {
@@ -117,6 +120,7 @@ function setup() {
     INPUT_BUILTIN="clear,rare,names"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Use an ignore words file" {
@@ -126,6 +130,7 @@ function setup() {
     INPUT_IGNORE_WORDS_FILE="./test/ignore-words-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Use an ignore words list" {
@@ -135,6 +140,7 @@ function setup() {
     INPUT_IGNORE_WORDS_LIST="abandonned"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Custom path" {
@@ -144,6 +150,7 @@ function setup() {
     INPUT_PATH="./test/testdata/subfolder"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
 
 @test "Only warn" {
@@ -153,4 +160,5 @@ function setup() {
     INPUT_ONLY_WARN=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
 }
