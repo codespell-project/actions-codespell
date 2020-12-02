@@ -44,10 +44,9 @@ function setup() {
 }
 
 @test "Run with defaults" {
-    # codespell's exit status is 0, or 65 if there are errors found
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
-    #if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
-    expectedExitStatus=65
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 
@@ -62,8 +61,8 @@ function setup() {
 }
 
 @test "Check file names" {
-    # codespell's exit status is 0, or 65 if there are errors found
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + FILENAME_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_CHECK_FILENAMES=true
     run "./entrypoint.sh"
@@ -71,7 +70,9 @@ function setup() {
 }
 
 @test "Check a hidden file" {
-    expectedExitStatus=$HIDDEN_MISSPELLING_COUNT
+    errorCount=$HIDDEN_MISSPELLING_COUNT
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_CHECK_HIDDEN=true
     INPUT_PATH="./test/testdata/.hidden"
     run "./entrypoint.sh"
@@ -79,56 +80,72 @@ function setup() {
 }
 
 @test "Check a hidden file without INPUT_CHECK_HIDDEN set" {
-    expectedExitStatus=0
+    errorCount=0
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_PATH="./test/testdata/.hidden"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Use an exclude file" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_EXCLUDE_FILE="./test/exclude-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Check the skip option" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_SKIP="example.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Use an additional builtin dictionary" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + BUILTIN_NAMES_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + BUILTIN_NAMES_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_BUILTIN="clear,rare,names"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Use an ignore words file" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_IGNORE_WORDS_FILE="./test/ignore-words-file.txt"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Use an ignore words list" {
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_IGNORE_WORDS_LIST="abandonned"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Custom path" {
-    expectedExitStatus=$((SUBFOLDER_MISSPELLING_COUNT))
+    errorCount=$((SUBFOLDER_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_PATH="./test/testdata/subfolder"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 }
 
 @test "Only warn" {
-    expectedExitStatus=0
+    errorCount=0
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_ONLY_WARN=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
