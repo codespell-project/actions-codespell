@@ -3,6 +3,9 @@
 # Tests using the Bats testing framework
 # https://github.com/bats-core/bats-core
 
+# Add some test debug from https://github.com/bats-core/bats-core/issues/199
+load teardown
+
 ROOT_MISSPELLING_COUNT=5
 FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
