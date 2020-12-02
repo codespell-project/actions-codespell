@@ -51,10 +51,10 @@ function setup() {
     [ $status -eq $expectedExitStatus ]
 
     # Check output
-    #[ "${lines[1]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
+    [ "${lines[1]}" == $errorCount ]
+    [ "${lines[2]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
     outputRegex="^Running codespell on '${INPUT_PATH}'"
-    #[[ "${lines[2]}" =~ $outputRegex ]]
-    #[ "${lines[-4]}" == $errorCount ]
+    [[ "${lines[3]}" =~ $outputRegex ]]
     [ "${lines[-3]}" == "Codespell found one or more problems" ]
     [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
     [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
