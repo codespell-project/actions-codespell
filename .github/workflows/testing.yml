@@ -64,6 +64,7 @@ jobs:
   diagnose_bats:
     name: Diagnose bats
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - uses: actions/checkout@v1
       - name: Set up Python
