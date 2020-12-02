@@ -41,8 +41,10 @@ function setup() {
 }
 
 @test "Run with defaults" {
-    # codespell's exit status is the number of misspelled words found
-    expectedExitStatus=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    # codespell's exit status is 0 or 65 if there are errors found
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    expectedExitStatus=0
+    [ $errorCount -eq 0 ] || expectedExitStatus=65
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 
@@ -50,6 +52,7 @@ function setup() {
     [ "${lines[1]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
     outputRegex="^Running codespell on '${INPUT_PATH}'"
     [[ "${lines[2]}" =~ $outputRegex ]]
+    [ "${lines[-4]}" == $errorCount ]
     [ "${lines[-3]}" == "Codespell found one or more problems" ]
     [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
     [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
