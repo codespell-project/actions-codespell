@@ -4,7 +4,8 @@
 # https://github.com/bats-core/bats-core
 
 # Add some test debug from https://github.com/bats-core/bats-core/issues/199
-load teardown
+# This currently breaks the tests, so only enabling when troubleshooting
+#load teardown
 
 ROOT_MISSPELLING_COUNT=5
 FILENAME_MISSPELLING_COUNT=1
@@ -17,6 +18,7 @@ SUBFOLDER_MISSPELLING_COUNT=1
 EXAMPLE_MISSPELLING_COUNT=5
 
 ERROR_COUNT_LINE_NUMBER=10
+BOOLEAN_OPTION_LINE_OFFSET=1
 
 export RUNNER_TEMP="/foo/runner_temp"
 
@@ -69,7 +71,7 @@ function setup() {
     INPUT_CHECK_FILENAMES=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
-    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER+$BOOLEAN_OPTION_LINE_OFFSET]}" == "$errorCount" ]
 }
 
 @test "Check a hidden file" {
@@ -80,7 +82,7 @@ function setup() {
     INPUT_PATH="./test/testdata/.hidden"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
-    [ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
+    [ "${lines[$ERROR_COUNT_LINE_NUMBER+$BOOLEAN_OPTION_LINE_OFFSET]}" == "$errorCount" ]
 }
 
 @test "Check a hidden file without INPUT_CHECK_HIDDEN set" {
@@ -160,5 +162,5 @@ function setup() {
     INPUT_ONLY_WARN=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
-    #[ "${lines[$ERROR_COUNT_LINE_NUMBER]}" == "$errorCount" ]
+    #[ "${lines[$ERROR_COUNT_LINE_NUMBER+$BOOLEAN_OPTION_LINE_OFFSET]}" == "$errorCount" ]
 }
