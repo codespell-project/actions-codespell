@@ -54,7 +54,7 @@ function setup() {
     # Check output
     #[ "${lines[1]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
     outputRegex="^Running codespell on '${INPUT_PATH}'"
-    [[ "${lines[2]}" =~ $outputRegex ]]
+    #[[ "${lines[2]}" =~ $outputRegex ]]
     #[ "${lines[-4]}" == $errorCount ]
     [ "${lines[-3]}" == "Codespell found one or more problems" ]
     [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
@@ -64,8 +64,7 @@ function setup() {
 @test "Check file names" {
     # codespell's exit status is 0, or 65 if there are errors found
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + FILENAME_MISSPELLING_COUNT))
-    #if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
-    expectedExitStatus=65
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_CHECK_FILENAMES=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
