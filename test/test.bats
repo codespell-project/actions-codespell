@@ -20,10 +20,10 @@ function setup() {
     # Simulate the Dockerfile COPY command
     [ -d "${RUNNER_TEMP}/code/" ] || sudo mkdir -p ${RUNNER_TEMP}/code/
     [ -f "${RUNNER_TEMP}/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json ${RUNNER_TEMP}/code/
-    ls -al ${RUNNER_TEMP}/code/
+    ls -alR ${RUNNER_TEMP}/code/
     [ -d "/code/" ] || sudo mkdir -p /code/
     [ -f "/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json /code/
-    ls -al /code/
+    ls -alR /code/
 
     # Set default input values
     export INPUT_CHECK_FILENAMES=""
