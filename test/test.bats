@@ -15,12 +15,12 @@ EXAMPLE_MISSPELLING_COUNT=5
 
 export RUNNER_TEMP="/foo/runner_temp"
 
-# Simulate the Dockerfile COPY command
-[ -d "/code/" ] || sudo mkdir /code/
-[ -f "/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json /code/
-
 # This function runs before every test
 function setup() {
+    # Simulate the Dockerfile COPY command
+    [ -d "${RUNNER_TEMP}/code/" ] || sudo mkdir ${RUNNER_TEMP}/code/
+    [ -f "${RUNNER_TEMP}/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json ${RUNNER_TEMP}/code/
+
     # Set default input values
     export INPUT_CHECK_FILENAMES=""
     export INPUT_CHECK_HIDDEN=""
