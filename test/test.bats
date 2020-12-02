@@ -12,7 +12,7 @@ FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
 BUILTIN_NAMES_MISSPELLING_COUNT=1
-IGNORE_WORDS_MISSPELLING_COUNT=6
+IGNORE_WORDS_MISSPELLING_COUNT=5
 SUBFOLDER_MISSPELLING_COUNT=1
 # From all files called example.txt
 EXAMPLE_MISSPELLING_COUNT=5
@@ -116,7 +116,7 @@ function setup() {
 }
 
 @test "Use an additional builtin dictionary" {
-    errorCount=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + BUILTIN_NAMES_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + BUILTIN_NAMES_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_BUILTIN="clear,rare,names"
@@ -126,7 +126,7 @@ function setup() {
 }
 
 @test "Use an ignore words file" {
-    errorCount=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_IGNORE_WORDS_FILE="./test/ignore-words-file.txt"
@@ -136,7 +136,7 @@ function setup() {
 }
 
 @test "Use an ignore words list" {
-    errorCount=$((ROOT_MISSPELLING_COUNT + HIDDEN_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - IGNORE_WORDS_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_IGNORE_WORDS_LIST="abandonned"
