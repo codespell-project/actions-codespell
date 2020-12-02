@@ -46,7 +46,8 @@ function setup() {
 @test "Run with defaults" {
     # codespell's exit status is 0, or 65 if there are errors found
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
-    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    #if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    expectedExitStatus=65
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
 
@@ -63,7 +64,8 @@ function setup() {
 @test "Check file names" {
     # codespell's exit status is 0, or 65 if there are errors found
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT + FILENAME_MISSPELLING_COUNT))
-    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    #if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    expectedExitStatus=65
     INPUT_CHECK_FILENAMES=true
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
