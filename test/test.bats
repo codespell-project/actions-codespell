@@ -27,7 +27,7 @@ function setup() {
     [ -d "/code/" ] || sudo mkdir -p /code/
     [ -f "/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json /code/
     ls -alR /code/
-    [ -d "/github/workflow/" ] || sudo mkdir -p /github/workflow/
+    [ -d "/github/workflow/" ] || sudo mkdir -p /github/workflow/ && sudo chmod 777 /github/workflow/
     # Add a random place BATS tries to put it
     ls -alR /github/workflow/
 
