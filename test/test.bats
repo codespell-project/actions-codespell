@@ -51,17 +51,17 @@ function setup() {
     [ $status -eq $expectedExitStatus ]
 
     # Check output
-    echo "Line 1"
-    echo ${lines[1]}
+    echo "Line 0"
+    echo ${lines[0]}
     echo "Output:"
     echo "$output"
-    [ "${lines[2]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
+    [ "${lines[0]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
     outputRegex="^Running codespell on '${INPUT_PATH}'"
-    [[ "${lines[3]}" =~ $outputRegex ]]
+    [[ "${lines[1]}" =~ $outputRegex ]]
+    [ "${lines[10]}" == "$errorCount" ]
     [ "${lines[-3]}" == "Codespell found one or more problems" ]
     [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
     [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
-    [ "${lines[1]}" == "$errorCount" ]
 }
 
 @test "Check file names" {
