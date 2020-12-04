@@ -46,7 +46,7 @@ if [ "x${INPUT_SKIP}" != "x" ]; then
 fi
 echo "Resulting CLI options ${command_args}"
 exec 5>&1
-res=`{ { codespell ${command_args} ${INPUT_PATH}; echo $? 1>&4; } 1>&5; } 4>&1`
+res=`{ { codespell --count ${command_args} ${INPUT_PATH}; echo $? 1>&4; } 1>&5; } 4>&1`
 if [ "$res" = "0" ]; then
     echo "Codespell found no problems"
 else
