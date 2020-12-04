@@ -82,4 +82,4 @@ jobs:
           export INPUT_IGNORE_WORDS_LIST=""
           export INPUT_PATH="./test/testdata"
           export INPUT_ONLY_WARN=""
-          ./entrypoint.sh
+          ./entrypoint.sh || echo $?
