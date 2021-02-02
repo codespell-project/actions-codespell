@@ -63,6 +63,8 @@ jobs:
 
   diagnose_bats:
     name: Diagnose bats
+    needs: test
+    if: ${{ needs.test.failure() }}
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
