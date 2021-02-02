@@ -79,8 +79,6 @@ jobs:
         uses: actions/setup-python@v2
       - run: pip3 --quiet --quiet install ${{ matrix.codespell_pip_version }}
       - run: |
-          # Skip the bats diagnostics
-          exit 0
           # Simulate the Dockerfile COPY command
           [ -d "${RUNNER_TEMP}/code/" ] || sudo mkdir -p ${RUNNER_TEMP}/code/
           [ -f "${RUNNER_TEMP}/code/codespell-matcher.json" ] || sudo cp codespell-problem-matcher/codespell-matcher.json ${RUNNER_TEMP}/code/
