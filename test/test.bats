@@ -7,7 +7,7 @@
 # This currently breaks the tests, so only enabling when troubleshooting
 #load teardown
 
-ROOT_MISSPELLING_COUNT=5
+ROOT_MISSPELLING_COUNT=42
 FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
