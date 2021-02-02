@@ -66,7 +66,7 @@ jobs:
   diagnose_bats:
     name: Diagnose bats
     needs: test
-    if: always() && (contains(needs.*.status, 'failure') || (needs.test.status == 'failure') || (needs.test.failure) || (needs.test.failure()))
+    if: always() && (contains(needs.*.status, 'failure') || (needs.test.status == 'failure') || (needs.test.failure))
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
