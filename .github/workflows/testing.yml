@@ -59,13 +59,13 @@ jobs:
         check_filenames: true
         check_hidden: true
         # When using this Action in other repos, the --skip option below can be removed
-        skip: ./.git,./codespell-problem-matcher/test,./test,./README.md
-    # Check our README ignoring the two intentional typos
+        skip: ./.git,./codespell-problem-matcher/test,./test,./README.md,./.github/workflows/testing.yml
+    # Check our README (and this workflow) ignoring the two intentional typos
     - uses: ./
       with:
         check_filenames: true
         check_hidden: true
-        path: ./README.md
+        path: ./README.md,./.github/workflows/testing.yml
         ignore_words_list: abandonned,ackward
 
   diagnose_bats:
