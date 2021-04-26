@@ -59,7 +59,14 @@ jobs:
         check_filenames: true
         check_hidden: true
         # When using this Action in other repos, the --skip option below can be removed
-        skip: ./.git,./codespell-problem-matcher/test,./test
+        skip: ./.git,./codespell-problem-matcher/test,./test,./README.md
+    # Check our README ignoring the two intentional typos
+    - uses: ./
+      with:
+        check_filenames: true
+        check_hidden: true
+        path: ./README.md
+        ignore_words_list: abandonned,ackward
 
   diagnose_bats:
     name: Diagnose bats
