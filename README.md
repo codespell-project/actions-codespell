@@ -57,6 +57,44 @@ with:
   skip: foo,bar
 ```
 
+### Parameter: builtin
+
+Comma-separated list of builtin dictionaries to use.
+
+This parameter is optional; by default `codespell` will use it's default selection of built in dictionaries.
+
+```
+uses: codespell-project/actions-codespell@master
+with:
+  builtin: clear,rare
+```
+
+### Parameter: ignore_words_file
+
+File that contains words which will be ignored by `codespell`. File must contain one word per line.
+Words are case sensitive based on how they are written in the dictionary file.
+
+This parameter is optional; by default `codespell` will check all words for typos.
+
+```
+uses: codespell-project/actions-codespell@master
+with:
+  ignore_words_file: .codespellignore
+```
+
+### Parameter: ignore_words_list
+
+Comma-separated list of words which will be ignored by `codespell`.
+Words are case sensitive based on how they are written in the dictionary file.
+
+This parameter is optional; by default `codespell` will check all words for typos.
+
+```
+uses: codespell-project/actions-codespell@master
+with:
+  ignore_words_list: speling,abandonned
+```
+
 ### Parameter: path
 
 Indicates the path to run `codespell` in.
