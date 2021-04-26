@@ -92,7 +92,7 @@ This parameter is optional; by default `codespell` will check all words for typo
 ```
 uses: codespell-project/actions-codespell@master
 with:
-  ignore_words_list: speling,abandonned
+  ignore_words_list: abandonned,ackward
 ```
 
 ### Parameter: path
