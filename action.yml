@@ -23,11 +23,11 @@ inputs:
     required: false
     default: ''
   ignore_words_file:
-    description: 'File with a list of words to be ignored'
+    description: 'File with a list of words to be ignored. Words are case sensitive based on how they are written in the dictionary file'
     required: false
     default: ''
   ignore_words_list:
-    description: 'Comma-separated list of words to be ignored'
+    description: 'Comma-separated list of words to be ignored. Words are case sensitive based on how they are written in the dictionary file'
     required: false
     default: ''
   path:
