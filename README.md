@@ -7,7 +7,6 @@ Any warnings or errors will be annotated in the Pull Request.
 
 ```
 - uses: actions/checkout@v2
-- uses: codespell-project/codespell-problem-matcher@v1
 - uses: codespell-project/actions-codespell@master
 ```
 
