@@ -30,6 +30,10 @@ inputs:
     description: 'Comma-separated list of words to be ignored. Words are case sensitive based on how they are written in the dictionary file'
     required: false
     default: ''
+  uri_ignore_words_list:
+    description: 'Comma-separated list of words to be ignored in URIs and emails only. Words are case sensitive based on how they are written in the dictionary file. If set to "*", all misspelling in URIs and emails will be ignored'
+    required: false
+    default: ''
   path:
     description: 'Path to run codespell in'
     required: false
