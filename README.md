@@ -61,7 +61,7 @@ with:
 
 Comma-separated list of builtin dictionaries to use.
 
-This parameter is optional; by default `codespell` will use it's default selection of built in dictionaries.
+This parameter is optional; by default `codespell` will use its default selection of built in dictionaries.
 
 ```
 uses: codespell-project/actions-codespell@master
