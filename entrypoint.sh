@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Copy the matcher to the host system; otherwise "add-matcher" can't find it.
 cp /code/codespell-matcher.json /github/workflow/codespell-matcher.json
@@ -27,6 +27,13 @@ fi
 echo "Skipping '${INPUT_SKIP}'"
 if [ "x${INPUT_SKIP}" != "x" ]; then
     command_args="${command_args} --skip ${INPUT_SKIP}"
+fi
+echo "Custom dictionary '${INPUT_DICTIONARY}'"
+if [ "x${INPUT_DICTIONARY}" != "x" ]; then
+    IFS=',' read -ra DICTIONARY <<< "${INPUT_DICTIONARY}"
+    for i in "${DICTIONARY[@]}"; do
+        command_args="${command_args} --dictionary $i"
+    done
 fi
 echo "Builtin dictionaries '${INPUT_BUILTIN}'"
 if [ "x${INPUT_BUILTIN}" != "x" ]; then
