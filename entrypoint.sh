@@ -40,6 +40,10 @@ echo "Ignore words list '${INPUT_IGNORE_WORDS_LIST}'"
 if [ "x${INPUT_IGNORE_WORDS_LIST}" != "x" ]; then
     command_args="${command_args} --ignore-words-list ${INPUT_IGNORE_WORDS_LIST}"
 fi
+echo "Ignore URI words list '${INPUT_URI_IGNORE_WORDS_LIST}'"
+if [ "x${INPUT_URI_IGNORE_WORDS_LIST}" != "x" ]; then
+    command_args="${command_args} --uri-ignore-words-list ${INPUT_URI_IGNORE_WORDS_LIST}"
+fi
 echo "Resulting CLI options ${command_args}"
 exec 5>&1
 res=`{ { codespell --count ${command_args} ${INPUT_PATH}; echo $? 1>&4; } 1>&5; } 4>&1`
