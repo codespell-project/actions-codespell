@@ -95,6 +95,20 @@ with:
   ignore_words_list: abandonned,ackward
 ```
 
+### Parameter: uri_ignore_words_list
+
+Comma-separated list of words which will be ignored by `codespell` in URIs and emails only.
+Words are case sensitive based on how they are written in the dictionary file.
+If set to "*", all misspelling in URIs and emails will be ignored.
+
+This parameter is optional; by default `codespell` will check all URIs and emails for typos.
+
+```
+uses: codespell-project/actions-codespell@master
+with:
+  uri_ignore_words_list: abandonned
+```
+
 ### Parameter: path
 
 Indicates the path to run `codespell` in.
