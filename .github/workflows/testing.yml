@@ -19,10 +19,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
 
       - name: Install codespell via pip using ${{ matrix.codespell_pip_version }}
         run: pip3 --quiet --quiet install ${{ matrix.codespell_pip_version }}
@@ -43,7 +43,7 @@ jobs:
     name: Test run action
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./
       with:
         path: test/testdata
@@ -53,7 +53,7 @@ jobs:
     name: Check for spelling errors
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
     - uses: ./
       with:
         check_filenames: true
@@ -81,9 +81,9 @@ jobs:
         include:
           - codespell_pip_version: 'git+https://github.com/codespell-project/codespell.git'
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
       - run: pip3 --quiet --quiet install ${{ matrix.codespell_pip_version }}
       - run: |
           # Simulate the Dockerfile COPY command
