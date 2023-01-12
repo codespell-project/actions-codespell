@@ -1,0 +1,3 @@
+[submodule "codespell-problem-matcher"]
+	path = codespell-problem-matcher
+	url = https://github.com/codespell-project/codespell-problem-matcher.git
