@@ -13,7 +13,7 @@ jobs:
     name: Publish master image
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build
       run: |
         GITHUB_REPOSITORY_LC=$(echo "${GITHUB_REPOSITORY}" | tr [A-Z] [a-z])
