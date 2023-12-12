@@ -20,6 +20,11 @@ if [ -n "${INPUT_CHECK_HIDDEN}" ]; then
     echo "Checking hidden"
     command_args="${command_args} --check-hidden"
 fi
+echo "Check quiet level? '${INPUT_QUIET_LEVEL}'"
+if [ -n "${INPUT_QUIET_LEVEL}" ]; then
+    echo "Checking quiet level"
+    command_args="${command_args} --quiet-level ${INPUT_QUIET_LEVEL}"
+fi
 echo "Exclude file '${INPUT_EXCLUDE_FILE}'"
 if [ "x${INPUT_EXCLUDE_FILE}" != "x" ]; then
     command_args="${command_args} --exclude-file ${INPUT_EXCLUDE_FILE}"
