@@ -18,6 +18,10 @@ inputs:
     description: 'Comma-separated list of files to skip (it accepts globs as well)'
     required: false
     default: './.git'
+  dictionary:
+    description: 'Comma-separated list of custom dictionary files that contains spelling corrections.'
+    required: false
+    default: ''  
   builtin:
     description: 'Comma-separated list of builtin dictionaries to include'
     required: false
