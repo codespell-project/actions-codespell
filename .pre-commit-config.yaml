@@ -3,6 +3,6 @@ repos:
     rev: v2.2.6
     hooks:
       - id: codespell
-        args: [--skip, "abandonned,ackward,bu"]
+        args: [--ignore-words-list, "abandonned,ackward,bu"]
         additional_dependencies:
           - tomli
