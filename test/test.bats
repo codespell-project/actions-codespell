@@ -39,6 +39,7 @@ function setup() {
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
     export INPUT_BUILTIN=""
+    export INPUT_CONFIG=""
     export INPUT_IGNORE_WORDS_FILE=""
     export INPUT_IGNORE_WORDS_LIST=""
     export INPUT_URI_IGNORE_WORDS_LIST=""
