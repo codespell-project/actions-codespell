@@ -94,6 +94,15 @@ function setup() {
     [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
 }
 
+@test "Pass an ill-formed file to INPUT_CONFIG" {
+    # codespell's exit status is 78 for a configparser.Error exception
+    expectedExitStatus=78
+    INPUT_CONFIG="./test/testdata/.badcfg"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+}
+
 @test "Use an exclude file" {
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
