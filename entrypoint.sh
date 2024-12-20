@@ -43,6 +43,7 @@ fi
 echo "Ignore URI words list '${INPUT_URI_IGNORE_WORDS_LIST}'"
 if [ "x${INPUT_URI_IGNORE_WORDS_LIST}" != "x" ]; then
     command_args="${command_args} --uri-ignore-words-list ${INPUT_URI_IGNORE_WORDS_LIST}"
+fi
 echo "Skipping '${INPUT_SKIP}'"
 if [ "x${INPUT_SKIP}" != "x" ]; then
     command_args="${command_args} --skip ${INPUT_SKIP}"
