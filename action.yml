@@ -46,6 +46,10 @@ inputs:
     description: "Regular expression that is used to find words"
     required: false
     default: ''
+  files:
+    description: "Files or directories to check"
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'

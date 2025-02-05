@@ -48,6 +48,10 @@ echo "Regular expression that is used to find words: '${INPUT_SKIP}'"
 if [ "x${INPUT_REGEX}" != "x" ]; then
     command_args="${command_args} --regex ${INPUT_REGEX}"
 fi
+echo "Files or directories to check: '${INPUT_SKIP}'"
+if [ "x${INPUT_FILES}" != "x" ]; then
+    command_args="${command_args} --regex ${INPUT_FILES}"
+fi
 echo "Resulting CLI options ${command_args}"
 exec 5>&1
 res=`{ { codespell --count ${command_args} ${INPUT_PATH}; echo $? 1>&4; } 1>&5; } 4>&1`
