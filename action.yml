@@ -42,6 +42,10 @@ inputs:
     description: 'If set, only warn, never error'
     required: false
     default: ''
+  regex:
+    description: "Regular expression that is used to find words"
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
