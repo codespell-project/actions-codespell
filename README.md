@@ -135,3 +135,34 @@ uses: codespell-project/actions-codespell@v2
 with:
   only_warn: 1
 ```
+
+### Parameter: regex
+
+Regular expression that is used to find words.
+
+This parameter is optional.
+
+### Parameter: files
+
+Files or directories to check.
+
+This parameter is optional.
+
+### Parameter: after_context
+
+Print a number of lines of trailing context.
+
+This parameter is optional.
+
+### Parameter: before_context
+
+Print a number of lines of leading context.
+
+This parameter is optional.
+
+### Parameter: context
+
+Print a number of lines of surrounding context.
+
+This parameter is optional.
+
