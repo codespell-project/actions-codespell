@@ -10,6 +10,7 @@
 ROOT_MISSPELLING_COUNT=6
 FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
+QUIET_LEVEL_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
 BUILTIN_NAMES_MISSPELLING_COUNT=1
 IGNORE_WORDS_MISSPELLING_COUNT=5
@@ -36,6 +37,7 @@ function setup() {
     # Set default input values
     export INPUT_CHECK_FILENAMES=""
     export INPUT_CHECK_HIDDEN=""
+    export INPUT_QUIET_LEVEL=""
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
     export INPUT_BUILTIN=""
@@ -79,6 +81,17 @@ function setup() {
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_CHECK_HIDDEN=true
     INPUT_PATH="./test/testdata/.hidden"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+    [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+}
+
+@test "Check quiet level" {
+    errorCount=$QUIET_LEVEL_MISSPELLING_COUNT
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    INPUT_QUIET_LEVEL="0"
+    INPUT_PATH="./test/testdata/example.bin"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
     [ "${lines[-4 - $errorCount]}" == "$errorCount" ]

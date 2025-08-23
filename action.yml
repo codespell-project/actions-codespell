@@ -10,6 +10,10 @@ inputs:
     description: 'If set, check hidden files (those starting with ".") as well'
     required: false
     default: ''
+  quiet_level:
+    description: 'Bitmask that allows suppressing messages'
+    required: false
+    default: ''
   exclude_file:
     description: 'File with lines that should not be checked for spelling mistakes'
     required: false
