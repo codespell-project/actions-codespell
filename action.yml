@@ -42,6 +42,26 @@ inputs:
     description: 'If set, only warn, never error'
     required: false
     default: ''
+  regex:
+    description: "Regular expression that is used to find words"
+    required: false
+    default: ''
+  files:
+    description: "Files or directories to check"
+    required: false
+    default: ''
+  after_context:
+    description: "Print a number of lines of trailing context"
+    required: false
+    default: ''
+  before_context:
+    description: "Print a number of lines of leading context"
+    required: false
+    default: ''
+  context:
+    description: "Print a number of lines of surrounding context"
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
