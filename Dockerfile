@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.13-alpine
 
 COPY LICENSE \
         README.md \
@@ -7,7 +7,7 @@ COPY LICENSE \
         requirements.txt \
         /code/
 
-RUN pip install -r /code/requirements.txt \
+RUN pip install --no-cache-dir -r /code/requirements.txt \
     && addgroup -g 1000 codespell \
     && adduser -u 1000 -G codespell -s /bin/sh -D codespell
 
