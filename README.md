@@ -6,7 +6,8 @@ Any warnings or errors will be annotated in the Pull Request.
 ## Usage
 
 ```yml
-uses: codespell-project/actions-codespell@v2
+- uses: actions/checkout@v5
+- uses: codespell-project/actions-codespell@v2
 ```
 
 ### Parameter: check_filenames
