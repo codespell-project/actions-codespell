@@ -39,6 +39,7 @@ function setup() {
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
     export INPUT_BUILTIN=""
+    export INPUT_CONFIG=""
     export INPUT_IGNORE_WORDS_FILE=""
     export INPUT_IGNORE_WORDS_LIST=""
     export INPUT_URI_IGNORE_WORDS_LIST=""
@@ -92,6 +93,50 @@ function setup() {
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
     [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+}
+
+@test "Pass an ill-formed file to INPUT_CONFIG" {
+    # codespell's exit status is 78 for a configparser.Error exception
+    expectedExitStatus=78
+    INPUT_CONFIG="./test/testdata/.badcfg"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+
+@test "Pass a non-existing file to INPUT_CONFIG" {
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    INPUT_CONFIG="./foo"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+
+    # Check output
+    [ "${lines[0]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
+    outputRegex="^Running codespell on '${INPUT_PATH}'"
+    [[ "${lines[1]}" =~ $outputRegex ]]
+    [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+    [ "${lines[-3]}" == "Codespell found one or more problems" ]
+    [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
+    [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
+}
+
+@test "Pass a valid file to INPUT_CONFIG" {
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    INPUT_CONFIG="./test/testdata/.goodcfg"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+
+    # Check output
+    [ "${lines[0]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
+    outputRegex="^Running codespell on '${INPUT_PATH}'"
+    [[ "${lines[1]}" =~ $outputRegex ]]
+    [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+    [ "${lines[-3]}" == "Codespell found one or more problems" ]
+    [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
+    [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
 }
 
 @test "Use an exclude file" {
