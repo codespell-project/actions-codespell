@@ -7,12 +7,13 @@
 # This currently breaks the tests, so only enabling when troubleshooting
 #load teardown
 
-ROOT_MISSPELLING_COUNT=5
+ROOT_MISSPELLING_COUNT=6
 FILENAME_MISSPELLING_COUNT=1
 HIDDEN_MISSPELLING_COUNT=1
 EXCLUDED_MISSPELLING_COUNT=1
 BUILTIN_NAMES_MISSPELLING_COUNT=1
 IGNORE_WORDS_MISSPELLING_COUNT=5
+URI_IGNORE_WORDS_MISSPELLING_COUNT=1
 SUBFOLDER_MISSPELLING_COUNT=1
 # From all files called example.txt
 EXAMPLE_MISSPELLING_COUNT=5
@@ -38,8 +39,10 @@ function setup() {
     export INPUT_EXCLUDE_FILE=""
     export INPUT_SKIP=""
     export INPUT_BUILTIN=""
+    export INPUT_CONFIG=""
     export INPUT_IGNORE_WORDS_FILE=""
     export INPUT_IGNORE_WORDS_LIST=""
+    export INPUT_URI_IGNORE_WORDS_LIST=""
     export INPUT_PATH="./test/testdata"
     export INPUT_ONLY_WARN=""
 }
@@ -92,6 +95,50 @@ function setup() {
     [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
 }
 
+@test "Pass an ill-formed file to INPUT_CONFIG" {
+    # codespell's exit status is 78 for a configparser.Error exception
+    expectedExitStatus=78
+    INPUT_CONFIG="./test/testdata/.badcfg"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+}
+
+@test "Pass a non-existing file to INPUT_CONFIG" {
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    INPUT_CONFIG="./foo"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+
+    # Check output
+    [ "${lines[0]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
+    outputRegex="^Running codespell on '${INPUT_PATH}'"
+    [[ "${lines[1]}" =~ $outputRegex ]]
+    [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+    [ "${lines[-3]}" == "Codespell found one or more problems" ]
+    [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
+    [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
+}
+
+@test "Pass a valid file to INPUT_CONFIG" {
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    INPUT_CONFIG="./test/testdata/.goodcfg"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+
+    # Check output
+    [ "${lines[0]}" == "::add-matcher::${RUNNER_TEMP}/_github_workflow/codespell-matcher.json" ]
+    outputRegex="^Running codespell on '${INPUT_PATH}'"
+    [[ "${lines[1]}" =~ $outputRegex ]]
+    [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+    [ "${lines[-3]}" == "Codespell found one or more problems" ]
+    [ "${lines[-2]}" == "::remove-matcher owner=codespell-matcher-default::" ]
+    [ "${lines[-1]}" == "::remove-matcher owner=codespell-matcher-specified::" ]
+}
+
 @test "Use an exclude file" {
     errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXCLUDED_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
@@ -103,7 +150,7 @@ function setup() {
 }
 
 @test "Check the skip option" {
-    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT))
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - EXAMPLE_MISSPELLING_COUNT - URI_IGNORE_WORDS_MISSPELLING_COUNT))
     # codespell's exit status is 0, or 65 if there are errors found
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_SKIP="example.txt"
@@ -137,6 +184,16 @@ function setup() {
     # codespell's exit status is 0, or 65 if there are errors found
     if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
     INPUT_IGNORE_WORDS_LIST="abandonned"
+    run "./entrypoint.sh"
+    [ $status -eq $expectedExitStatus ]
+    [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
+}
+
+@test "Use a URI ignore words list" {
+    errorCount=$((ROOT_MISSPELLING_COUNT + SUBFOLDER_MISSPELLING_COUNT - URI_IGNORE_WORDS_MISSPELLING_COUNT))
+    # codespell's exit status is 0, or 65 if there are errors found
+    if [ $errorCount -eq 0 ]; then expectedExitStatus=0; else expectedExitStatus=65; fi
+    INPUT_URI_IGNORE_WORDS_LIST="bu"
     run "./entrypoint.sh"
     [ $status -eq $expectedExitStatus ]
     [ "${lines[-4 - $errorCount]}" == "$errorCount" ]
