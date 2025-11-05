@@ -6,7 +6,7 @@ Any warnings or errors will be annotated in the Pull Request.
 ## Usage
 
 ```
-- uses: actions/checkout@v2
+- uses: actions/checkout@v5
 - uses: codespell-project/actions-codespell@master
 ```
 
