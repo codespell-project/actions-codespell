@@ -48,14 +48,14 @@ with:
 
 ### Parameter: config
 
-Path to a `codespell` config file (for example `setup.cfg` or `.codespellrc`).
+Path to a `codespell` config file. The file uses INI format with a `[codespell]` section.
 
-This parameter is optional; by default `codespell` will use its own configuration discovery.
+This parameter is optional. By default `codespell` automatically reads configuration from `pyproject.toml`, `setup.cfg`, and `.codespellrc` in the working directory; use this parameter only to point at a config file in a non-standard location.
 
 ```yml
 uses: codespell-project/actions-codespell@v2
 with:
-  config: .codespellrc
+  config: path/to/codespell.cfg
 ```
 
 ### Parameter: skip
