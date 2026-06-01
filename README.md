@@ -46,6 +46,18 @@ with:
   exclude_file: src/foo
 ```
 
+### Parameter: config
+
+Path to a `codespell` config file. The file uses INI format with a `[codespell]` section.
+
+This parameter is optional. By default `codespell` automatically reads configuration from `pyproject.toml`, `setup.cfg`, and `.codespellrc` in the working directory; use this parameter only to point at a config file in a non-standard location.
+
+```yml
+uses: codespell-project/actions-codespell@v2
+with:
+  config: path/to/codespell.cfg
+```
+
 ### Parameter: skip
 
 Comma-separated list of files to skip (it accepts globs as well).
