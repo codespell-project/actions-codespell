@@ -46,6 +46,18 @@ with:
   exclude_file: src/foo
 ```
 
+### Parameter: config
+
+Path to a `codespell` config file (for example `setup.cfg` or `.codespellrc`).
+
+This parameter is optional; by default `codespell` will use its own configuration discovery.
+
+```yml
+uses: codespell-project/actions-codespell@v2
+with:
+  config: .codespellrc
+```
+
 ### Parameter: skip
 
 Comma-separated list of files to skip (it accepts globs as well).
