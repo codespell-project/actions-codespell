@@ -7,7 +7,7 @@ COPY LICENSE \
         requirements.txt \
         /code/
 
-RUN pip install --no-cache-dir -r /code/requirements.txt
+RUN pip install --no-cache-dir --require-hashes -r /code/requirements.txt
 
 ENTRYPOINT ["/code/entrypoint.sh"]
 CMD []

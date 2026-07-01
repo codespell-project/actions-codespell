@@ -1,1 +1,10 @@
-codespell[toml]>=2.2.4
+# Hashes enable pip's hash-checking mode (see
+# https://pip.pypa.io/en/stable/topics/secure-installs/#hash-checking-mode),
+# required via --require-hashes in the Dockerfile. When bumping the version,
+# regenerate both hashes for the new release:
+#   pip download --no-deps codespell==<version>            # wheel
+#   pip download --no-deps --no-binary :all: codespell==<version>  # sdist
+#   pip hash <each downloaded file>
+codespell[toml]==2.4.2 \
+    --hash=sha256:97e0c1060cf46bd1d5db89a936c98db8c2b804e1fdd4b5c645e82a1ec6b1f886 \
+    --hash=sha256:3c33be9ae34543807f088aeb4832dfad8cb2dae38da61cac0a7045dd376cfdf3
