@@ -8,3 +8,10 @@ updates:
     directory: / # Check the repository's workflows under /.github/workflows/
     schedule:
       interval: daily
+
+  # Configure check for outdated base image digest in the Dockerfile.
+  # See: https://docs.docker.com/build/building/best-practices/#pin-base-image-versions
+  - package-ecosystem: docker
+    directory: / # Check the repository's Dockerfile at /Dockerfile
+    schedule:
+      interval: weekly
