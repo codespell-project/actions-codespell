@@ -6,7 +6,7 @@ Any warnings or errors will be annotated in the Pull Request.
 ## Usage
 
 ```yml
-- uses: actions/checkout@v6
+- uses: actions/checkout@v7
 - uses: codespell-project/actions-codespell@v2
 ```
 
