@@ -12,7 +12,7 @@ Any warnings or errors will be annotated in the Pull Request.
 
 ### Parameter: check_filenames
 
-If set, check file names for spelling mistakes as well.
+If set, check file names for speling mistakes as well.
 
 This parameter is optional; by default `codespell` will only check the file contents.
 
