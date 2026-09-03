@@ -15,3 +15,9 @@ updates:
     directory: / # Check the repository's Dockerfile at /Dockerfile
     schedule:
       interval: weekly
+
+  # Configure check for outdated codespell version in requirements.txt.
+  - package-ecosystem: pip
+    directory: / # Check the repository's Python dependencies at /requirements.txt
+    schedule:
+      interval: daily
