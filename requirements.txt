@@ -5,6 +5,6 @@
 #   pip download --no-deps codespell==<version>            # wheel
 #   pip download --no-deps --no-binary :all: codespell==<version>  # sdist
 #   pip hash <each downloaded file>
-codespell[toml]==2.4.2 \
-    --hash=sha256:97e0c1060cf46bd1d5db89a936c98db8c2b804e1fdd4b5c645e82a1ec6b1f886 \
-    --hash=sha256:3c33be9ae34543807f088aeb4832dfad8cb2dae38da61cac0a7045dd376cfdf3
+codespell[toml]==2.4.3 \
+    --hash=sha256:af2505b335e8573dbd2d384d1c4ef498f4006f4ba2d6fceca01e55b91f52628a \
+    --hash=sha256:cbe085e331227b37bb86ef8bddd08dc768c704ee9a07ca869852c093fa2793e2
