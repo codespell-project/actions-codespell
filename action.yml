@@ -46,7 +46,7 @@ inputs:
     description: 'If set, only warn, never error'
     required: false
     default: ''
-  auto_fix:
+  write_changes:
     description: 'Write fixes automatically'
     required: false
     default: ''
