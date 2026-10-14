@@ -54,6 +54,20 @@ jobs:
         path: test/testdata
         only_warn: 1
 
+  test_write:
+    name: Test that writes work
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+    - uses: ./
+      with:
+        path: test/testdata
+        only_warn: 1
+        write_changes: true
+    - name: Check git status
+      run: |
+        if git diff --quiet; then echo "For some reason, no write was performed. This appears to be a bug." && exit 1; else exit 0; fi
+
   codespell:
     name: Check for spelling errors
     runs-on: ubuntu-latest

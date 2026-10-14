@@ -46,6 +46,10 @@ inputs:
     description: 'If set, only warn, never error'
     required: false
     default: ''
+  write_changes:
+    description: 'Write fixes automatically'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
