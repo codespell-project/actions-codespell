@@ -27,7 +27,6 @@ fi
 echo "Write changes? '${INPUT_WRITE_CHANGES}'"
 if [ -n "${INPUT_WRITE_CHANGES}" ]; then
     echo "Writing changes"
-    command_args="${command_args} --write-changes"
 fi
 echo "Config '${INPUT_CONFIG}'"
 if [ "x${INPUT_CONFIG}" != "x" ]; then
@@ -59,7 +58,13 @@ res=`{ { codespell --count ${command_args} ${INPUT_PATH}; echo $? 1>&4; } 1>&5; 
 if [ "$res" = "0" ]; then
     echo "Codespell found no problems"
 else
-    echo "Codespell found one or more problems"
+    if [ -n "${INPUT_WRITE_CHANGES}" ]; then
+        echo "Codespell found one or more problems to be fixed"
+        command_args="${command_args} --write-changes"
+        codespell --count ${command_args} ${INPUT_PATH} &> /dev/null
+    else
+        echo "Codespell found one or more problems"
+    fi
 fi
 
 # Remove the matchers, so no other jobs hit them.
