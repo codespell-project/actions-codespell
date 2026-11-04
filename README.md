@@ -148,3 +148,15 @@ uses: codespell-project/actions-codespell@v2
 with:
   only_warn: 1
 ```
+
+### Parameter: write_changes
+
+Write changes. Note that this will not commit or push; you will need to handle that in the workflow.
+
+This parameter is optional; by default `codespell` will run in "dry-run" mode.
+
+```yml
+uses: codespell-project/actions-codespell@v2
+with:
+  write_changes: 1
+```
